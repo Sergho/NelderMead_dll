@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 file(GLOB SOURCES "src/*.cpp" )
 file(GLOB HEADERS "include/*.h") 
+file(GLOB WRAPPER "wrapper.cxx")
 
 # Загружаем nlohmann/json из GitHub
 include(FetchContent)
@@ -18,7 +19,7 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(nlohmann_json)
 
-add_library(NelderMid SHARED ${SOURCES} ${HEADERS})
+add_library(NelderMid SHARED ${SOURCES} ${HEADERS} ${WRAPPER})
 
 target_include_directories(NelderMid PUBLIC include)
 
