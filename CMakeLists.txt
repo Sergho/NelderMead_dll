@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)  
-project(NelderMid_DLL)
+project(NelderMead_DLL)
 
 set(CMAKE_CXX_STANDARD 17) 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -19,14 +19,16 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(nlohmann_json)
 
-add_library(NelderMid SHARED ${SOURCES} ${HEADERS} ${WRAPPER})
+add_library(NelderMead SHARED ${SOURCES} ${HEADERS} ${WRAPPER})
 
-target_include_directories(NelderMid PUBLIC include)
+target_include_directories(NelderMead PUBLIC include)
 
-target_link_libraries(NelderMid PRIVATE nlohmann_json::nlohmann_json)
+target_link_libraries(NelderMead PUBLIC nlohmann_json::nlohmann_json)
 
 # Для Windows: определяем макрос MYLIBRARY_EXPORTS
 if(WIN32)
     target_compile_definitions(NelderMid PRIVATE NELDERMID_EXPORTS)
 endif()
 
+add_executable(${PROJECT_NAME} src/main.cpp)
+target_link_libraries(${PROJECT_NAME} PUBLIC NelderMead)
